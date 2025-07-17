@@ -1,0 +1,80 @@
+{
+  "manifest_version": 3,
+  "name": "AIFox",
+  "version": "1.0.0",
+  "description": "Una extensión para Firefox que proporciona acceso a las mejores aplicaciones de IA y un gestor de prompts",
+  "author": "AIFox Team",
+  "homepage_url": "https://github.com/tontodeloscojones/Aifox",
+  
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  
+  "action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    },
+    "default_title": "AIFox",
+    "default_popup": "popup/popup.html"
+  },
+  
+  "sidebar_action": {
+    "default_title": "AIFox",
+    "default_panel": "sidebar/sidebar.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  
+  "permissions": [
+    "storage",
+    "tabs",
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  
+  "optional_permissions": [
+    "bookmarks"
+  ],
+  
+  "host_permissions": [
+    "*://*.openai.com/*",
+    "*://*.anthropic.com/*",
+    "*://*.google.com/*"
+  ],
+  
+  "background": {
+    "scripts": ["background.js"]
+  },
+  
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Abrir el panel lateral de AIFox"
+    },
+    "open_prompt_manager": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P"
+      },
+      "description": "Abrir el gestor de prompts"
+    }
+  },
+  
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "aifox@example.com",
+      "strict_min_version": "109.0"
+    }
+  },
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
