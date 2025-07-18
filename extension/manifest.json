@@ -1,0 +1,73 @@
+{
+  "manifest_version": 2,
+  "name": "AIFox",
+  "version": "1.0.0",
+  "description": "Access to the top 300 AI applications and a comprehensive prompt manager for Firefox",
+  "author": "AIFox Team",
+  "homepage_url": "https://github.com/tontodeloscojones/Aifox",
+  
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    },
+    "default_title": "AIFox",
+    "default_popup": "popup/popup.html"
+  },
+  
+  "sidebar_action": {
+    "default_title": "AIFox",
+    "default_panel": "sidebar/sidebar.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  
+  "permissions": [
+    "storage",
+    "tabs",
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  
+  "optional_permissions": [
+    "bookmarks"
+  ],
+  
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Open AIFox sidebar panel"
+    },
+    "open_prompt_manager": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P"
+      },
+      "description": "Open prompt manager"
+    }
+  },
+  
+  "applications": {
+    "gecko": {
+      "id": "aifox@example.com",
+      "strict_min_version": "109.0"
+    }
+  },
+  
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

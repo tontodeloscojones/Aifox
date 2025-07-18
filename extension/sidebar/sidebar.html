@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIFox Sidebar</title>
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <div class="sidebar-container">
+    <!-- Header -->
+    <header class="sidebar-header">
+      <div class="header-content">
+        <div class="logo">
+          <img src="../icons/icon-32.png" alt="AIFox" class="logo-icon">
+          <h1>AIFox</h1>
+        </div>
+        <div class="header-actions">
+          <button id="settings-btn" class="icon-btn" title="Settings">
+            <span>⚙️</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search AI apps and prompts..." class="search-input">
+        <button id="search-btn" class="search-btn">
+          <span>🔍</span>
+        </button>
+      </div>
+      
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs">
+        <button id="ai-apps-tab" class="nav-tab active" data-view="ai-apps">
+          <span class="tab-icon">📱</span>
+          <span class="tab-text">AI Apps</span>
+        </button>
+        <button id="prompts-tab" class="nav-tab" data-view="prompts">
+          <span class="tab-icon">📝</span>
+          <span class="tab-text">Prompts</span>
+        </button>
+      </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="sidebar-content">
+      <!-- AI Apps View -->
+      <div id="ai-apps-view" class="view active">
+        <!-- Categories Sidebar -->
+        <aside class="categories-sidebar">
+          <h3>Categories</h3>
+          <div id="categories-list" class="categories-list">
+            <!-- Categories will be populated by JavaScript -->
+          </div>
+        </aside>
+        
+        <!-- Apps Grid -->
+        <section class="apps-section">
+          <div class="section-header">
+            <h2 id="apps-section-title">All AI Applications</h2>
+            <div class="sort-controls">
+              <select id="sort-select" class="sort-select">
+                <option value="popularity">Sort by Popularity</option>
+                <option value="name">Sort by Name</option>
+                <option value="category">Sort by Category</option>
+              </select>
+            </div>
+          </div>
+          
+          <div id="apps-grid" class="apps-grid">
+            <!-- Apps will be populated by JavaScript -->
+          </div>
+          
+          <div id="apps-loading" class="loading hidden">
+            <span>Loading applications...</span>
+          </div>
+        </section>
+      </div>
+      
+      <!-- Prompts View -->
+      <div id="prompts-view" class="view">
+        <!-- Prompts Navigation -->
+        <nav class="prompts-nav">
+          <button id="my-prompts-btn" class="prompts-nav-btn active" data-section="my-prompts">
+            My Prompts
+          </button>
+          <button id="discover-prompts-btn" class="prompts-nav-btn" data-section="discover">
+            Discover
+          </button>
+          <button id="favorites-btn" class="prompts-nav-btn" data-section="favorites">
+            Favorites
+          </button>
+        </nav>
+        
+        <!-- My Prompts Section -->
+        <section id="my-prompts-section" class="prompts-section active">
+          <div class="section-header">
+            <h2>My Prompts</h2>
+            <button id="new-prompt-btn" class="btn primary">
+              <span>+ New Prompt</span>
+            </button>
+          </div>
+          
+          <div id="my-prompts-list" class="prompts-list">
+            <!-- User prompts will be populated by JavaScript -->
+          </div>
+        </section>
+        
+        <!-- Discover Section -->
+        <section id="discover-section" class="prompts-section">
+          <div class="section-header">
+            <h2>Discover Prompts</h2>
+            <div class="filters">
+              <select id="category-filter" class="filter-select">
+                <option value="">All Categories</option>
+              </select>
+              <select id="model-filter" class="filter-select">
+                <option value="">All Models</option>
+              </select>
+            </div>
+          </div>
+          
+          <div id="public-prompts-list" class="prompts-list">
+            <!-- Public prompts will be populated by JavaScript -->
+          </div>
+        </section>
+        
+        <!-- Favorites Section -->
+        <section id="favorites-section" class="prompts-section">
+          <div class="section-header">
+            <h2>Favorite Prompts</h2>
+          </div>
+          
+          <div id="favorites-list" class="prompts-list">
+            <!-- Favorite prompts will be populated by JavaScript -->
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Prompt Editor Modal -->
+  <div id="prompt-editor-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="editor-title">New Prompt</h3>
+        <button id="close-editor" class="close-btn">✖️</button>
+      </div>
+      
+      <form id="prompt-form" class="prompt-form">
+        <div class="form-group">
+          <label for="prompt-title-input">Title:</label>
+          <input type="text" id="prompt-title-input" class="form-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="prompt-category-input">Category:</label>
+          <select id="prompt-category-input" class="form-select" required>
+            <option value="">Select Category</option>
+            <option value="Writing">Writing</option>
+            <option value="Programming">Programming</option>
+            <option value="Business">Business</option>
+            <option value="Education">Education</option>
+            <option value="Research">Research</option>
+            <option value="Creativity">Creativity</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="prompt-model-input">AI Model:</label>
+          <select id="prompt-model-input" class="form-select" required>
+            <option value="">Select Model</option>
+            <option value="GPT-4">GPT-4</option>
+            <option value="GPT-3.5">GPT-3.5</option>
+            <option value="Claude">Claude</option>
+            <option value="Gemini">Gemini</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="prompt-tags-input">Tags:</label>
+          <input type="text" id="prompt-tags-input" class="form-input" placeholder="Separate with commas">
+        </div>
+        
+        <div class="form-group">
+          <label for="prompt-content-input">Content:</label>
+          <textarea id="prompt-content-input" class="form-textarea" rows="8" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="prompt-public-input">
+            <span class="checkmark"></span>
+            Make this prompt public
+          </label>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" id="cancel-prompt" class="btn secondary">Cancel</button>
+          <button type="submit" id="save-prompt" class="btn primary">Save Prompt</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Settings</h3>
+        <button id="close-settings" class="close-btn">✖️</button>
+      </div>
+      
+      <div class="settings-content">
+        <div class="settings-section">
+          <h4>Appearance</h4>
+          <div class="setting-item">
+            <label>Theme:</label>
+            <select id="theme-select" class="form-select">
+              <option value="auto">Auto</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="settings-section">
+          <h4>General</h4>
+          <div class="setting-item">
+            <label class="checkbox-label">
+              <input type="checkbox" id="open-sidebar-startup">
+              <span class="checkmark"></span>
+              Open sidebar on startup
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <button id="reset-settings" class="btn secondary">Reset to Defaults</button>
+        <button id="save-settings" class="btn primary">Save Settings</button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../components/shared/storage.js"></script>
+  <script src="../components/shared/ui-components.js"></script>
+  <script src="../components/ai-apps-index/ai-apps-index.js"></script>
+  <script src="../components/prompt-manager/prompt-manager.js"></script>
+  <script src="sidebar.js"></script>
+</body>
+</html>
